@@ -4,7 +4,8 @@
 
 @import 'normalize.css';
 @import 'variables.css';
-
+@import 'globals.css';
+@import 'components.css';
 /* ------------------- */
 /* Utility classes     */
 /* ------------------- */
@@ -40,3 +41,4 @@
   white-space: nowrap; /* added line */
   border: 0;
 }
+
