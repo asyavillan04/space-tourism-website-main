@@ -2,7 +2,7 @@
 /* Imports             */
 /* ------------------- */
 
-@import 'normalize.css';
+@import 'reset.css';
 @import 'variables.css';
 @import 'globals.css';
 @import 'components.css';
