@@ -3,6 +3,7 @@
 /* ------------------- */
 
 @import 'normalize.css';
+@import 'variables.css';
 
 /* ------------------- */
 /* Utility classes     */
@@ -16,6 +17,10 @@
 .grid {
     display: grid;
     gap: var(--gap, 1rem);
+}
+
+.flow > * + * {      /*for spacing!*/
+    margin-top: var(--flow-space, 1rem);
 }
 
 .container {
