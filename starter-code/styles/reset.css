@@ -45,6 +45,7 @@ select {
     font: inherit;
 }
 
+/* buttons reset */
 button {
     all: unset;
     cursor: pointer;
