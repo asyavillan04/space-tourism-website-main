@@ -11,7 +11,7 @@ body {
 .home {
     background-image: url(../assets/home/background-home-mobile.jpg);
         min-height: 100vh;
-    min-height: 100dvh; /* для мобильных браузеров с динамической высотой */
+        min-height: 100dvh; 
 }
 
 @media (min-width: 35rem) {
