@@ -1,3 +1,4 @@
+/* set up the body */
 body {
     font-family: var(--ff-sans-normal);
     font-size: var(--fs-400);
@@ -5,6 +6,9 @@ body {
     background-color: hsl( var(--clr-dark) );
     line-height: 1.5;
     min-height: 100vh;
+    
+    display: grid;
+    grid-template-rows: min-content 1fr;
 }
 
 /* colors */

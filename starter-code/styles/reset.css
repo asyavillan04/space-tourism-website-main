@@ -34,11 +34,6 @@ p {
     font-weight: 400;
 }
 
-/* set up the body */
-body {
-    line-height: 1.5;
-    min-height: 100vh;
-}
 
 /* make images easier to work with */
 img,
