@@ -6,6 +6,7 @@
 @import 'variables.css';
 @import 'globals.css';
 @import 'components.css';
+@import 'pages.css';
 
 
 /* ------------------- */
@@ -37,12 +38,19 @@
 }
 
 .grid-container {
-    border: 1px solid limegreen;
     display: grid;
+    text-align: center;
+    place-items: center;
+    padding-inline: 1rem;
+}
+
+.grid-container * {
+    max-width: 50ch;
 }
 
 @media (min-width: 45rem) {
         .grid-container {
+            text-align: left;
             column-gap: var(--container-gap, 2rem);
             grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
     }
@@ -51,10 +59,17 @@
     grid-column: 2;
 }
 
-.grid-container > *:last-child {
-    grid-column: 3;
+    .grid-container > *:last-child {
+        grid-column: 3;
+    }
+
+    .grid-container--home {
+        padding-bottom: max(6rem, 20vh);
+        align-items: end;
+    }
 }
-}
+
+
 
 .sr-only {
   position: absolute;
@@ -67,4 +82,3 @@
   white-space: nowrap; /* added line */
   border: 0;
 }
-
