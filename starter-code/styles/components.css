@@ -50,6 +50,20 @@
         flex-direction: column;
         gap: 0;
     }
+
+    .underline-indicators > * {
+            cursor: pointer;
+            padding: var(--underline-gap, 1rem) 0;
+            border: 0;
+            border-bottom: .2rem solid hsl( var(--clr-white) / 0 );
+    }
+
+        .underline-indicators > *:hover,
+        .underline-indicators > *:focus,
+        .underline-indicators > .active,
+        .underline-indicators > [aria-selected="true"] {
+            border: 0
+        }
 }
 
 .primary-navigation a {
