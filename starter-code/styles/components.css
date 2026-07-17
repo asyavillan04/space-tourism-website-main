@@ -60,6 +60,11 @@
         flex-direction: column;
         gap: 0;
         transform: translateX(100%);
+        transition: 0.3s ease;
+    }
+
+    .primary-navigation[data-visible="true"] {
+        transform: translateX(0);
     }
 
     .primary-navigation.underline-indicators > .active {
