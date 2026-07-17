@@ -50,17 +50,22 @@
 
 @media (min-width: 45rem) {
         .grid-container {
-            text-align: left;
+            
             column-gap: var(--container-gap, 2rem);
             grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
     }
 
     .grid-container > *:first-child {
     grid-column: 2;
+    text-align: left;
 }
 
     .grid-container > *:last-child {
         grid-column: 3;
+        display: flex;
+        width: 100%;
+        align-items: flex-end;
+        justify-content: flex-end;
     }
 
     .grid-container--home {
