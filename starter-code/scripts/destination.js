@@ -7,8 +7,8 @@ const webpSource = picture?.querySelector('source[type="image/webp"]'); // дл�
 
 const planetName = document.querySelector('.destination-info h2');
 const planetDescription = document.querySelector('.destination-info p');
-const planetDistance = document.querySelector('.destination-meta p:first-of-type');
-const planetTravel = document.querySelector('.destination-meta p:last-of-type');
+const planetDistance = document.querySelector('.destination-meta div:first-child p');
+const planetTravel = document.querySelector('.destination-meta div:last-child p');
 const tabs = document.querySelectorAll('.tab-list button');
 
 
@@ -40,26 +40,45 @@ function showDestination(index) {
   const planet = destinations[index];
   if (!planet) return;
 
-  // Text data
-  planetName.textContent = planet.name;
-  planetDescription.textContent = planet.description;
-  planetDistance.textContent = planet.distance;
-  planetTravel.textContent = planet.travel;
+  // Элементы, которые будут анимироваться
+  const elementsToFade = [
+    planetName,
+    planetDescription,
+    planetDistance,
+    planetTravel,
+    picture
+  ];
 
-  // Picture
-  if (webpSource) webpSource.srcset = planet.images.webp;
-  if (img) {
-    img.src = planet.images.png;
-    img.alt = planet.name;
-  }
+  // 1. Добавляем fade-out всем элементам
+  elementsToFade.forEach(el => el?.classList.add('fade-out'));
 
-  tabs.forEach((tab, i) => {
-    const isActive = i === index;
-    tab.setAttribute('aria-selected', isActive);
-    tab.classList.toggle('active', isActive);
-  });
+  // 2. Ждём окончания анимации (0.3s)
+  setTimeout(() => {
+    // 3. Обновляем контент
+    planetName.textContent = planet.name;
+    planetDescription.textContent = planet.description;
+    planetDistance.textContent = planet.distance;
+    planetTravel.textContent = planet.travel;
 
-  currentIndex = index;
+    // Обновляем изображение
+    if (webpSource) webpSource.srcset = planet.images.webp;
+    if (img) {
+      img.src = planet.images.png;
+      img.alt = planet.name;
+    }
+
+    // Обновляем активный таб
+    tabs.forEach((tab, i) => {
+      const isActive = i === index;
+      tab.setAttribute('aria-selected', isActive);
+      tab.classList.toggle('active', isActive);
+    });
+
+    // 4. Убираем fade-out (контент плавно появляется)
+    elementsToFade.forEach(el => el?.classList.remove('fade-out'));
+
+    currentIndex = index;
+  }, 300);
 }
 
 // =============================================

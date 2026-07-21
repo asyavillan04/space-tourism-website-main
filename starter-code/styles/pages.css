@@ -124,7 +124,7 @@ body {
     font-size: 1.75rem;
 }
 
-/* crew layout */
+/* ------------------------------------ crew layout */
 
 .grid-container--crew {
     --flow-space: 2rem;
@@ -227,4 +227,25 @@ body {
         align-self: end;
     }
 
+}
+
+
+/* ----------------------------- */
+/* Animations                    */
+/* ----------------------------- */
+
+.fade-out { /* for tabs switching */
+  opacity: 0;
+}
+
+/* -----------------------------  destination animations */
+.destination-info h2,
+.destination-info p,
+.destination-meta p,
+.grid-container--destination picture {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.grid-container--destination {
+  position: relative;
 }
