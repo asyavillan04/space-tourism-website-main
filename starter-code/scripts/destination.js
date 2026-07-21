@@ -1,13 +1,16 @@
 // =============================================
 // DOM Elements
 // =============================================
-const planetImage = document.querySelector('.grid-container--destination picture');
-const planetImg = planetImage?.querySelector('img');
+const picture = document.querySelector('picture');             // контейнер <picture>
+const img = picture?.querySelector('img');                     // <img> внутри
+const webpSource = picture?.querySelector('source[type="image/webp"]'); // для webp
+
 const planetName = document.querySelector('.destination-info h2');
 const planetDescription = document.querySelector('.destination-info p');
-const planetDistance = document.querySelector('.destination-meta p:first-child');
-const planetTravel = document.querySelector('.destination-meta p:last-child');
+const planetDistance = document.querySelector('.destination-meta p:first-of-type');
+const planetTravel = document.querySelector('.destination-meta p:last-of-type');
 const tabs = document.querySelectorAll('.tab-list button');
+
 
 // =============================================
 // State
@@ -21,13 +24,11 @@ let currentIndex = 0;
 async function loadData() {
   try {
     const response = await fetch('./data.json');
-    if (!response.ok) {
-      throw new Error(`Failed to load data: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Could not load data:', error);
+    console.error('Не удалось загрузить data.json:', error);
     return null;
   }
 }
@@ -39,25 +40,19 @@ function showDestination(index) {
   const planet = destinations[index];
   if (!planet) return;
 
-  // Update text content
+  // Text data
   planetName.textContent = planet.name;
   planetDescription.textContent = planet.description;
   planetDistance.textContent = planet.distance;
   planetTravel.textContent = planet.travel;
 
-  // Update image (webp + png)
-  if (planetImage) {
-    const webpSource = planetImage.querySelector('source[type="image/webp"]');
-    if (webpSource) {
-      webpSource.srcset = planet.images.webp;
-    }
-    if (planetImg) {
-      planetImg.src = planet.images.png;
-      planetImg.alt = planet.name;
-    }
+  // Picture
+  if (webpSource) webpSource.srcset = planet.images.webp;
+  if (img) {
+    img.src = planet.images.png;
+    img.alt = planet.name;
   }
 
-  // Update active tab
   tabs.forEach((tab, i) => {
     const isActive = i === index;
     tab.setAttribute('aria-selected', isActive);
@@ -83,7 +78,4 @@ async function init() {
   showDestination(0);
 }
 
-// =============================================
-// Start
-// =============================================
 init();
