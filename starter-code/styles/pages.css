@@ -148,6 +148,10 @@ body {
     grid-area: content;
 }
 
+.crew-info h2 {
+    opacity: .5;
+}
+
 @media (min-width: 35em) {
     .numbered-title {
         justify-self: start;

@@ -31,6 +31,10 @@
     margin-top: var(--flow-space, 1rem);
 }
 
+.flow--space-small {
+    --flow-space: .7rem;
+}
+
 .container {
     padding-inline: 2em;
     margin-inline: auto;
