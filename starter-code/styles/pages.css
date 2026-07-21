@@ -88,10 +88,20 @@ body {
         justify-self: start;
         margin-top: 2rem;
     }
+
     .destination-meta {
         flex-direction: row;
         justify-content: space-evenly;
     }    
+
+    .grid-container--crew {
+        padding-bottom: 0;
+        grid-template-areas: 
+            'title'
+            'content'
+            'tabs'
+            'image';
+    }
 }
 
 @media (min-width: 45em) {
@@ -123,13 +133,33 @@ body {
             '. image content .';
     }
 
-    .grid-container--destination > img {
+    .grid-container--destination > img,
+    .grid-container--crew > img {
+        max-width: 80%;
+    }
+
+    .grid-container--crew > img {
         max-width: 85%;
     }
 
     .destination-meta {
         --gap: min(6vw, 6rem);
         justify-content: start;
+    }
+
+    .grid-container--crew {
+        grid-template-areas: 
+            '. title image .'
+            '. content image .'
+            '. tabs image .';
+    }
+
+    .grid-container--crew > .dot-indicators {
+        justify-self: start;
+    }
+
+    .grid-container--crew > img {
+        align-self: end;
     }
 
 }
