@@ -103,6 +103,8 @@ body {
 .grid-container--destination > picture {
     grid-area: image;
     max-width: 80%;
+    align-self: start;
+    justify-self: center;
 }
 
 .grid-container--destination > .tab-list {
