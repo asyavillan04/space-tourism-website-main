@@ -36,12 +36,14 @@
   
   <main id="main" class="grid-container grid-container--crew flow">
     <h1 class="numbered-title"><span aria-hidden="true">02</span> Meet your crew</h1>
+
     <div class="dot-indicators flex">
-      <button aria-selected="true"><span class="sr-only">The commander</span></button>
-      <button aria-selected="false"><span class="sr-only">The mission specialist</span></button>
-      <button aria-selected="false"><span class="sr-only">The pilot</span></button>
-      <button aria-selected="false"><span class="sr-only">The crew engineer</span></button>
+      <button aria-selected="true" aria-controls="commander-tab" data-image="commander-image"><span class="sr-only">The commander</span></button>
+      <button aria-selected="false" aria-controls="mission-tab" data-image="mission-image"><span class="sr-only">The mission specialist</span></button>
+      <button aria-selected="false" aria-controls="pilot-tab" data-image="pilot-image"><span class="sr-only">The pilot</span></button>
+      <button aria-selected="false" aria-controls="crew-tab" data-image="crew-image"><span class="sr-only">The crew engineer</span></button>
     </div>
+
     <article class="crew-info flow">
       <header class="flow flow--space-small">
         <h2 class="fs-600 ff-serif uppercase">Commander</h2>
