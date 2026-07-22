@@ -14,7 +14,8 @@
   <!-- CSS -->
   <link rel="stylesheet" href="styles/index.css">
   <title>Frontend Mentor | Space tourism website</title>
-  <script src="index.js" defer></script>
+  <script src="scripts/crew.js" defer></script>
+
 </head>
 
 <body class="crew">
@@ -37,14 +38,14 @@
   <main id="main" class="grid-container grid-container--crew flow">
     <h1 class="numbered-title"><span aria-hidden="true">02</span> Meet your crew</h1>
 
-    <div class="dot-indicators flex">
-      <button aria-selected="true" aria-controls="commander-tab" data-image="commander-image"><span class="sr-only">The commander</span></button>
-      <button aria-selected="false" aria-controls="mission-tab" data-image="mission-image"><span class="sr-only">The mission specialist</span></button>
-      <button aria-selected="false" aria-controls="pilot-tab" data-image="pilot-image"><span class="sr-only">The pilot</span></button>
-      <button aria-selected="false" aria-controls="crew-tab" data-image="crew-image"><span class="sr-only">The crew engineer</span></button>
+    <div class="dot-indicators flex" role="tablist" aria-label="crew member list">
+      <button aria-selected="true" aria-controls="commander-tab" role="tab" data-image="commander-image" tabindex="0"><span class="sr-only">The commander</span></button>
+      <button aria-selected="false" aria-controls="mission-tab" role="tab" data-image="mission-image" tabindex="-1"><span class="sr-only">The mission specialist</span></button>
+      <button aria-selected="false" aria-controls="pilot-tab" role="tab" data-image="pilot-image" tabindex="-1"><span class="sr-only">The pilot</span></button>
+      <button aria-selected="false" aria-controls="crew-tab" role="tab" data-image="crew-image" tabindex="-1"><span class="sr-only">The crew engineer</span></button>
     </div>
 
-    <article class="crew-info flow">
+    <article class="crew-info flow"id="commander-tab" role="tabpanel" tabindex="0">
       <header class="flow flow--space-small">
         <h2 class="fs-600 ff-serif uppercase">Commander</h2>
         <p class="fs-700 uppercase ff-serif">Douglas Hurley</p>
