@@ -204,8 +204,7 @@ body {
             '. image content .';
     }
 
-    .grid-container--destination > picture,
-    .grid-container--crew > picture {
+    .grid-container--destination > picture {
         max-width: 80%;
     }
 
@@ -215,18 +214,18 @@ body {
     }
 
     .grid-container--crew {
+        grid-template-columns: minmax(1rem, 1fr) minmax(0, 37rem) minmax(0, 23rem) minmax(1rem, 1fr);
+        justify-items: start;
         grid-template-areas: 
             '. title image .'
             '. content image .'
             '. tabs image .';
     }
-
-    .grid-container--crew > .dot-indicators {
-        justify-self: start;
-    }
-
+    
     .grid-container--crew > picture {
         align-self: end;
+        max-width: 100%;
+        max-height: 100%;
     }
 
 }
