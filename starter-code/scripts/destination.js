@@ -1,22 +1,24 @@
 // =============================================
 // DOM Elements
 // =============================================
-const picture = document.querySelector('picture');             // контейнер <picture>
-const img = picture?.querySelector('img');                     // <img> внутри
-const webpSource = picture?.querySelector('source[type="image/webp"]'); // для webp
+const picture = document.querySelector('picture');
+const img = picture?.querySelector('img');
+const webpSource = picture?.querySelector('source[type="image/webp"]');
 
 const planetName = document.querySelector('.destination-info h2');
 const planetDescription = document.querySelector('.destination-info p');
 const planetDistance = document.querySelector('.destination-meta div:first-child p');
 const planetTravel = document.querySelector('.destination-meta div:last-child p');
-const tabs = document.querySelectorAll('.tab-list button');
 
+const tabList = document.querySelector('[role="tablist"]');
+const tabs = tabList.querySelectorAll('[role="tab"]');
 
 // =============================================
 // State
 // =============================================
 let destinations = [];
-let currentIndex = 0;
+let currentIndex = 0; 
+let tabFocus = 0;   
 
 // =============================================
 // Fetch JSON data
@@ -40,7 +42,6 @@ function showDestination(index) {
   const planet = destinations[index];
   if (!planet) return;
 
-  // Элементы, которые будут анимироваться
   const elementsToFade = [
     planetName,
     planetDescription,
@@ -49,18 +50,14 @@ function showDestination(index) {
     picture
   ];
 
-  // 1. Добавляем fade-out всем элементам
   elementsToFade.forEach(el => el?.classList.add('fade-out'));
 
-  // 2. Ждём окончания анимации (0.3s)
   setTimeout(() => {
-    // 3. Обновляем контент
     planetName.textContent = planet.name;
     planetDescription.textContent = planet.description;
     planetDistance.textContent = planet.distance;
     planetTravel.textContent = planet.travel;
 
-    // Обновляем изображение
     if (webpSource) webpSource.srcset = planet.images.webp;
     if (img) {
       img.src = planet.images.png;
@@ -72,13 +69,44 @@ function showDestination(index) {
       const isActive = i === index;
       tab.setAttribute('aria-selected', isActive);
       tab.classList.toggle('active', isActive);
+      // Управляем tabindex для клавиатурной навигации
+      tab.setAttribute('tabindex', isActive ? '0' : '-1');
     });
 
-    // 4. Убираем fade-out (контент плавно появляется)
     elementsToFade.forEach(el => el?.classList.remove('fade-out'));
 
     currentIndex = index;
+    tabFocus = index;   // синхронизируем фокус с текущей вкладкой
   }, 300);
+}
+
+// =============================================
+// Keyboard navigation
+// =============================================
+function changeTabFocus(e) {
+  const keyLeft = 37;
+  const keyRight = 39;
+
+  if (e.keyCode === keyLeft || e.keyCode === keyRight) {
+    tabs[tabFocus].setAttribute('tabindex', '-1');
+
+    if (e.keyCode === keyRight) {
+      tabFocus++;
+      if (tabFocus >= tabs.length) {
+        tabFocus = 0;
+      }
+    } else if (e.keyCode === keyLeft) {
+      tabFocus--;
+      if (tabFocus < 0) {
+        tabFocus = tabs.length - 1;
+      }
+    }
+
+    tabs[tabFocus].setAttribute('tabindex', '0');
+    tabs[tabFocus].focus();
+
+    showDestination(tabFocus);
+  }
 }
 
 // =============================================
@@ -90,9 +118,12 @@ async function init() {
 
   destinations = data.destinations;
 
+
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => showDestination(i));
   });
+
+  tabList.addEventListener('keydown', changeTabFocus);
 
   showDestination(0);
 }

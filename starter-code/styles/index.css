@@ -67,3 +67,8 @@
 .skip-to-content:focus {
     transform: translateY(0);
 }
+
+.tab-list button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
