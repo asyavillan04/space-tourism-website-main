@@ -306,7 +306,7 @@ body.page-transitioning::before {
   opacity: 0;
 }
 
-/* -----------------------------  destination animations */
+/*  destination animations */
 .destination-info h2,
 .destination-info p,
 .destination-meta p,
@@ -316,4 +316,10 @@ body.page-transitioning::before {
 
 .grid-container--destination {
   position: relative;
+}
+/*  destination animations */
+.crew-info h2,
+.crew-info p,
+.crew-info picture {
+    transition: opacity 0.6s ease;
 }
