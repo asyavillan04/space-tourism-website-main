@@ -194,10 +194,22 @@
     background-color: hsl( var(--clr-white) / 1); 
 }
 
-.num-indicators > * {
+.num-indicators > * {     /*  numbers 1 2 3 in technology page*/
     display: inline-grid;
-    width: 2rem;
-    outline: 1px solid hsl(var(--clr-white) / 1);
+    width: min(4rem, 10vmin);
+    outline: 1px solid hsl(var(--clr-white) / .5);
     border-radius: 50%;
     aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.num-indicators > *:hover,
+.num-indicators > *:focus {
+    outline-color: hsl( var(--clr-white) / 1);
+}
+
+.num-indicators > [aria-selected="true"] {
+    background-color: hsl( var(--clr-white) / 1);
+    color: hsl( var(--clr-dark) / 1); 
 }
