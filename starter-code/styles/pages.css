@@ -323,3 +323,12 @@ body.page-transitioning::before {
 .crew-info picture {
     transition: opacity 0.6s ease;
 }
+/*  technology animations */
+.technology-info h2,
+.technology-info p,
+.grid-container--technology img {
+    transition: opacity 0.6s ease;
+}
+.fade-out {
+    opacity: 0;
+}
