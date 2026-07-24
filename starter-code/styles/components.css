@@ -194,6 +194,10 @@
     background-color: hsl( var(--clr-white) / 1); 
 }
 
+.num-indicators {
+    align-self: center;
+}
+
 .num-indicators > * {     /*  numbers 1 2 3 in technology page*/
     display: inline-grid;
     width: min(4rem, 10vmin);

@@ -1,91 +1,77 @@
 /* ----------------------------- */
-/* Page specific background      */
+/* Backgrounds                   */
 /* ----------------------------- */
+/* I used pseudo elements to make the background fade smoothly while changing the page. Didn't want to make the header fade too.*/
 body {
+    position: relative;  
+    background-image: none 
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
     background-size: cover;
     background-position: bottom center;
     background-repeat: no-repeat;
+    z-index: -1; 
+    transition: opacity 0.3s ease;
 }
 
-/* home */
-.home {
+.home::before {
     background-image: url(../assets/home/background-home-mobile.jpg);
-        min-height: 100vh;
-        min-height: 100dvh; 
+}
+
+.destination::before {
+    background-image: url(../assets/destination/background-destination-mobile.jpg);
+}
+
+.crew::before {
+    background-image: url(../assets/crew/background-crew-mobile.jpg);
+}
+
+.technology::before {
+    background-image: url(../assets/technology/background-technology-mobile.jpg);
 }
 
 @media (min-width: 35rem) {
-    .home {
+    .home::before {
         background-position: center center;
         background-image: url(../assets/home/background-home-tablet.jpg);
     }
-}
-
-@media (min-width: 45rem) {
-    .home {
-        background-image: url(../assets/home/background-home-desktop.jpg);
-    }
-}
-
-/* destination */
-.destination {
-    background-image: url(../assets/destination/background-destination-mobile.jpg);
-        min-height: 100vh;
-        min-height: 100dvh; 
-}
-
-@media (min-width: 35rem) {
-    .destination {
+    .destination::before {
         background-position: center center;
         background-image: url(../assets/destination/background-destination-tablet.jpg);
     }
-}
-
-@media (min-width: 45rem) {
-    .destination {
-        background-image: url(../assets/destination/background-destination-desktop.jpg);
-    }
-}
-
-/* crew */
-.crew {
-    background-image: url(../assets/crew/background-crew-mobile.jpg);
-        min-height: 100vh;
-        min-height: 100dvh; 
-}
-
-@media (min-width: 35rem) {
-    .crew {
+    .crew::before {
         background-position: center center;
         background-image: url(../assets/crew/background-crew-tablet.jpg);
     }
-}
-
-@media (min-width: 45rem) {
-    .crew {
-        background-position: bottom center;
-        background-image: url(../assets/crew/background-crew-desktop.jpg);
-    }
-}
-
-/* tecnology */
-.technology {
-    background-image: url(../assets/technology/background-technology-mobile.jpg);
-        min-height: 100vh;
-        min-height: 100dvh; 
-}
-
-@media (min-width: 35rem) {
-    .technology {
+    .technology::before {
         background-position: center center;
         background-image: url(../assets/technology/background-technology-tablet.jpg);
     }
 }
 
 @media (min-width: 45rem) {
-    .technology {
+    .home::before {
+        background-image: url(../assets/home/background-home-desktop.jpg);
+    }
+    .destination::before {
+        background-image: url(../assets/destination/background-destination-desktop.jpg);
+    }
+    .crew::before {
+        background-position: bottom center;
+        background-image: url(../assets/crew/background-crew-desktop.jpg);
+    }
+    .technology::before {
         background-image: url(../assets/technology/background-technology-desktop.jpg);
     }
+}
+
+/* Класс, который запускает исчезновение фона */
+body.page-transitioning::before {
+    opacity: 0;
 }
 
 /* ----------------------------- */
@@ -217,10 +203,13 @@ body {
 
 .grid-container--technology > .num-indicators {
     grid-area: tabs;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid-container--technology > .technology-wrapper {
     grid-area: content;
+    flex-direction: column;
 }
 
 .technology-info h2 {
@@ -290,6 +279,10 @@ body {
             '. title title .'
             '. content image image'
             '. content image image';
+    }
+
+    .grid-container--technology > .technology-wrapper {
+        flex-direction: row;
     }
 
     .grid-container--technology > .technology-wrapper > .num-indicators {

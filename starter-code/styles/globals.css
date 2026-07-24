@@ -63,3 +63,11 @@ body {
     font-weight: 700;
     color: hsl( var(--clr-white) / .25);
 }
+
+main {
+  transition: opacity 0.3s ease;
+}
+
+main.fade-out {
+  opacity: 0;
+}

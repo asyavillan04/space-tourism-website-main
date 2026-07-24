@@ -20,6 +20,7 @@ const tabs = tabList.querySelectorAll('[role="tab"]');
 let crew = [];
 let currentIndex = 0;
 let tabFocus = 0;
+let initialLoad = true;   // ← new flag
 
 // =============================================
 // Fetch JSON data
@@ -37,7 +38,7 @@ async function loadData() {
 }
 
 // =============================================
-// Re‑query elements inside the article
+// Re-query elements inside the article
 // =============================================
 function updateArticleElements() {
   roleElement = document.querySelector('.crew-info h2');
@@ -54,7 +55,32 @@ function showCrewMember(index) {
 
   const elementsToFade = [roleElement, nameElement, bioElement, picture];
 
-  // fade out
+  // First load – no animation
+  if (initialLoad) {
+    roleElement.textContent = member.role;
+    nameElement.textContent = member.name;
+    bioElement.textContent = member.bio;
+
+    if (webpSource) webpSource.srcset = member.images.webp;
+    if (img) {
+      img.src = member.images.png;
+      img.alt = member.name;
+    }
+
+    tabs.forEach((tab, i) => {
+      const isActive = i === index;
+      tab.setAttribute('aria-selected', isActive);
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+
+    currentIndex = index;
+    tabFocus = index;
+    initialLoad = false;
+    return;
+  }
+
+  // Normal crossfade
   elementsToFade.forEach(el => el?.classList.add('fade-out'));
 
   setTimeout(() => {
@@ -68,7 +94,6 @@ function showCrewMember(index) {
       img.alt = member.name;
     }
 
-    // update active tab
     tabs.forEach((tab, i) => {
       const isActive = i === index;
       tab.setAttribute('aria-selected', isActive);
@@ -76,7 +101,6 @@ function showCrewMember(index) {
       tab.setAttribute('tabindex', isActive ? '0' : '-1');
     });
 
-    // fade in
     elementsToFade.forEach(el => el?.classList.remove('fade-out'));
 
     currentIndex = index;
@@ -85,7 +109,7 @@ function showCrewMember(index) {
 }
 
 // =============================================
-// Keyboard navigation (left / right arrows)
+// Keyboard navigation (left/right arrows)
 // =============================================
 function changeTabFocus(e) {
   const keyLeft = 37;
@@ -119,22 +143,19 @@ async function init() {
 
   updateArticleElements();
 
-  // mouse click handlers
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => showCrewMember(i));
   });
 
-  // keyboard handler
   tabList.addEventListener('keydown', changeTabFocus);
 
-  // auto‑switch when tab receives focus (e.g. via Tab key)
   tabs.forEach((tab, i) => {
     tab.addEventListener('focus', () => {
       if (currentIndex !== i) showCrewMember(i);
     });
   });
 
-  // show first crew member
+  // Show first crew member
   showCrewMember(0);
 }
 
